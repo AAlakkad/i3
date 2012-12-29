@@ -16,10 +16,10 @@ CRIT_COLOR="#ff2c4a"
 DZEN_FG="#A0A0A0"
 DZEN_BG="#222222"
 HEIGHT=12
-WIDTH=1000
+WIDTH=1100
 #RESOLUTIONW=`xrandr | grep -r "current" | awk '{print $8}'` 
 #RESOLUTIONH=`xrandr | grep -r "current" | awk '{print $10}' | tr -d ','`
-X=490
+X=450
 Y=3
 BAR_FG="#EE3B3B"
 BAR_BG="#808080"
@@ -47,7 +47,7 @@ Vol ()
 {
 	#ONF=$(amixer get Master | awk '/Front\ Left:/ {print $7}' | tr -d '[]')
 	VOL=$(amixer get Master | egrep -o "[0-9]+%" | tr -d '%')
-	echo -n "^fg($COLOR_ICON)^i($ICONPATH/vol1.xbm)^fg()" ${VOL} $(echo $VOL | gdbar -fg $BAR_FG -bg $BAR_BG -h $BAR_H -w $BAR_W -s o -nonl)
+	echo -n "^fg($COLOR_ICON)^i($ICONPATH/vol1.xbm)^fg()" $(echo $VOL | gdbar -fg $BAR_FG -bg $BAR_BG -h 7 -w 40 -s o -nonl)
 	return
 }
 
@@ -89,9 +89,9 @@ Disk ()
 MPD ()
 {
 	MPDSTATUS=$(mpc | awk '/\[/ {print $1}' | tr -d "[]")
-	MPDINFO=$(mpc | grep -)
+	MPDINFO=$(mpc | grep -v 'volume:' | head -n1)
 	if [[ $MPDSTATUS == "playing" ]] ; then
-		echo -n "^fg($COLOR_ICON)^i($ICONPATH/note1.xbm)^fg(#a0a0a0) [Playing] - $MPDINFO"
+		echo -n "^fg($COLOR_ICON)^i($ICONPATH/note1.xbm)^fg(#a0a0a0) $MPDINFO"
 	elif [[ $MPDSTATUS == "paused" ]] ; then
 		echo -n "^fg($COLOR_ICON)^i($ICONPATH/note1.xbm)^fg(#a0a0a0) [Paused]"
 	else
