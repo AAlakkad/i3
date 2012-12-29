@@ -1,6 +1,6 @@
 #------------------------------------------#
-# i3 config file (v4)					#
-# gpix - #linuxdistrocommunity on freenode #
+# i3 config
+# gpix - #linuxdistrocommunity on freenode
 #------------------------------------------#
 
 set $mod Mod4
@@ -19,7 +19,7 @@ new_window 1pixel
 hide_edge_borders both
 
 #-----------------------#
-# Keybindings			#
+# Keybindings
 #-----------------------#
 
 # start a terminal
@@ -115,7 +115,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #-----------------#
-# Status bar	  #
+# Status bar
 #-----------------#
 
 bar {
@@ -137,13 +137,13 @@ bar {
 }
 
 #-----------------------#
-# Workspace Assignments #
+# Workspace Assignments
 #-----------------------#
 assign [class="^Deluge$" instance="^deluge$"] 3:torr
 assign [class="^Firefox$" instance="^Navigator$"] 2:www
 
 #------------------------#
-# Autostart applications #
+# Autostart applications
 #------------------------#
 #exec_always killall conky
 #exec_always --no-startup-id conky
