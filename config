@@ -1,150 +1,155 @@
-#------------------------------------------#
-# i3 config
-# gpix - #linuxdistrocommunity on freenode
-#------------------------------------------#
-
-set $mod Mod4
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-#class                  border   backgr.  text
-client.focused          #EE3B3B #EE3B3B #EE3B3B
-client.focused_inactive #EE3B3B #191919 #EE3B3B
-client.unfocused        #EE3B3B #191919 #999999
-client.urgent           #EE3B3B #EE3B3B #EE3B3B
-client.background       #121212
-
+################################################################################
+# i3 config file (v4.6)
+################################################################################
 new_window 1pixel
 hide_edge_borders both
 
-#-----------------------#
-# Keybindings
-#-----------------------#
+# font for window titles. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+# use Mouse+Mod1 to drag floating windows to their wanted position
+floating_modifier Mod4
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym Mod4+Return exec --no-startup-id urxvtc
 
 # kill focused window
 bindsym Control+Shift+z kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run
-
-# Program keybindings
-bindsym $mod+Shift+Return exec --no-startup-id spacefm
+bindsym Mod4+p exec dmenu_run 
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym Mod4+h focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym Mod4+Shift+h move left
+bindsym Mod4+Shift+j move down
+bindsym Mod4+Shift+k move up
+bindsym Mod4+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
 
-# split orientation
-bindsym $mod+bar split h
-bindsym $mod+minus split v
+# split in horizontal orientation
+bindsym Mod4+bar split h
 
-# scratchpad keybindings
-bindsym $mod+Shift+equal move scratchpad
-bindsym $mod+equal scratchpad show
+# split in vertical orientation
+bindsym Mod4+minus split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym Mod4+f fullscreen
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# change container layout (stacked, tabbed, default)
+bindsym Mod4+s layout stacking
+bindsym Mod4+t layout tabbed
+bindsym Mod4+d layout default
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym Mod4+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym Mod4+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym Mod4+a focus parent
+
+# focus the child container
+#bindsym Mod4+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1:main
-bindsym $mod+2 workspace 2:www
-bindsym $mod+3 workspace 3:torr
-bindsym $mod+4 workspace 4:media
-bindsym $mod+0 workspace 5:misc
+bindsym Mod4+1 workspace 1: term
+bindsym Mod4+2 workspace 2: www
+bindsym Mod4+3 workspace 3: media
+bindsym Mod4+4 workspace 4: gfx
+bindsym Mod4+5 workspace 5: misc
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:main
-bindsym $mod+Shift+2 move container to workspace 2:www
-bindsym $mod+Shift+3 move container to workspace 3:torr
-bindsym $mod+Shift+4 move container to workspace 4:media
-bindsym $mod+Shift+5 move container to workspace 5:misc
-
-# resize bindings
-bindsym $mod+Control+h resize shrink width 5 px or 5 ppt
-bindsym $mod+Control+k resize grow height 5 px or 5 ppt
-bindsym $mod+Control+j resize shrink height 5 px or 5 ppt
-bindsym $mod+Control+l resize grow width 5 px or 5 ppt
-bindsym $mod+Control+Left resize shrink width 5 px or 5 ppt
-bindsym $mod+Control+Up resize grow height 5 px or 5 ppt
-bindsym $mod+Control+Down resize shrink height 5 px or 5 ppt
-bindsym $mod+Control+Right resize grow width 5 px or 5 ppt
+bindsym Mod4+Shift+1 move workspace 1: term
+bindsym Mod4+Shift+2 move workspace 2: www
+bindsym Mod4+Shift+3 move workspace 3: media
+bindsym Mod4+Shift+4 move workspace 4: gfx
+bindsym Mod4+Shift+5 move workspace 5: misc
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym Mod4+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym Mod4+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym Mod4+Shift+e exit
 
-#-----------------#
-# Status bar
-#-----------------#
+#testing
+bindsym Mod4+Control+h           resize shrink left  2 px
+bindsym Mod4+Control+Shift+h     resize grow   left  2 px
+bindsym Mod4+Control+j           resize shrink down  2 px
+bindsym Mod4+Control+Shift+j     resize grow   down  2 px
+bindsym Mod4+Control+k           resize shrink up    2 px
+bindsym Mod4+Control+Shift+k     resize grow   up    2 px
+bindsym Mod4+Control+l           resize shrink right 2 px
+bindsym Mod4+Control+Shift+l     resize grow   right 2 px
 
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink left 10 px or 10 ppt
+        bindsym Shift+Left  resize grow   left 10 px or 10 ppt
+
+        bindsym Down        resize shrink down 10 px or 10 ppt
+        bindsym Shift+Down  resize grow   down 10 px or 10 ppt
+
+        bindsym Up          resize shrink up 10 px or 10 ppt
+        bindsym Shift+Up    resize grow   up 10 px or 10 ppt
+
+        bindsym Right       resize shrink right 10 px or 10 ppt
+        bindsym Shift+Right resize grow   right 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym Mod4+r mode "resize"
+
+bindsym XF86AudioLowerVolume exec amixer set Master 2dB-
+bindsym XF86AudioRaiseVolume exec amixer set Master 2dB+
+# Microsoft Ergo Shortcut Keys 1-5 (don't match keycodes though)
+bindsym XF86Launch5 exec vlc
+bindsym XF86Launch6 exec gimp
+bindsym XF86Launch7 exec dolphin
+#bindsym XF86Launch8
+#bindsym XF86Launch9
+bindsym XF86HomePage exec chromium-browser
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
 bar {
 	mode dock
 	position top
 	workspace_buttons yes
-   	status_command sh ~/bin/status.sh
-   	tray_output none
+    status_command sh ~/.config/i3/status.sh
+	tray_output none
 	font -*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*
 	colors {
-		background #222222
-   		statusline #605c5a
-		# item				 border	  bg	  fg
-  		focused_workspace	#101010 #101010 #EE3B3B
-   		active_workspace	#3300FF #101010 #101010
-   		inactive_workspace	#222222 #222222 #A0A0A0
-		urgent_workspace	#2e3436 #9a878f
+		background #1f1f1f
+		statusline #605c5a
+		# item			border   bg   fg
+		focused_workspace #101010 #101010 #51df1d
+		active_workspace #3300FF #101010 #101010
+		inactive_workspace #222222 #222222 #A0A0A0
+		urgent_workspace #2e3436 #9a878f
 	}
 }
-
-#-----------------------#
-# Workspace Assignments
-#-----------------------#
-assign [class="^Deluge$" instance="^deluge$"] 3:torr
-assign [class="^Firefox$" instance="^Navigator$"] 2:www
-
-#------------------------#
-# Autostart applications
-#------------------------#
-#exec_always killall conky
-#exec_always --no-startup-id conky
-exec_always urxvtc -e cmatrix
