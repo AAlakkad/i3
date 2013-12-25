@@ -1,5 +1,5 @@
 ###README
-===============================
+* * *
 
 Here is a screenshot of what the bar produced by status.sh looks like:
 
