@@ -10,3 +10,5 @@ Note: I don't use everything in the status.sh script, but one could use
 
 Font: Terminus  
 Icons: stlarch\_icons [available on the AUR]
+
+...Markdown rocks.
