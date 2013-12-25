@@ -1,34 +1,38 @@
 #!/bin/sh
 
 # ------------------------------------------------------
-# file:     $HOME/.config/i3/status.sh
-# author:   gpix
-# modified: December 2013
+# file:     $HOME/.scripts/dzenstat.sh
+# author:   Ramon Solis - http://cyb3rpunk.wordpress.com
+# modified: June 2011
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
 # ------------------------------------------------------
 
 # -------------------------
 # Dzen settings & Variables
 # -------------------------
-ICONPATH="/home/gpix/.config/i3/icons/stlarch_icons"
-#COLOR_ICON="#048283"
-COLOR_ICON="#51df1d"
+ICONPATH="/usr/share/icons/stlarch_icons"
+COLOR_ICON="#EE3B3B"
 CRIT_COLOR="#ff2c4a"
 DZEN_FG="#A0A0A0"
-DZEN_BG="#1f1f1f"
+DZEN_BG="#222222"
 HEIGHT=12
 WIDTH=1100
+#RESOLUTIONW=`xrandr | grep -r "current" | awk '{print $8}'` 
+#RESOLUTIONH=`xrandr | grep -r "current" | awk '{print $10}' | tr -d ','`
 X=450
 Y=3
-BAR_FG="#51df1d"
+BAR_FG="#EE3B3B"
 BAR_BG="#808080"
-BAR_H=7
-BAR_W=40
+BAR_H=10
+BAR_W=65
+#FONT="-artwiz-anorexia-medium-r-normal--11-110-75-75-p-90-iso8859-1"
 FONT="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
+
 SLEEP=1
 VUP="amixer -c0 -q set Master 2dB+"
 VDOWN="amixer -c0 -q set Master 2dB-"
-EVENT="button3=exit;button1=exec:$VUP;button2=exec:$VDOWN;"
-DZEN="dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -fn $FONT -ta right -bg $DZEN_BG -fg $DZEN_FG"
+#EVENT="button3=exit;button4=exec:$VUP;button5=exec:$VDOWN"
+DZEN="dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -fn $FONT -ta right -bg $DZEN_BG -fg $DZEN_FG" 
 
 # -------------
 # Infinite loop
@@ -43,7 +47,7 @@ Vol ()
 {
 	#ONF=$(amixer get Master | awk '/Front\ Left:/ {print $7}' | tr -d '[]')
 	VOL=$(amixer get Master | egrep -o "[0-9]+%" | tr -d '%')
-	echo -n "^fg($COLOR_ICON)^i($ICONPATH/vol1.xbm)^fg()" $(echo $VOL | gdbar -fg $BAR_FG -bg $BAR_BG -h $BAR_H -w 2 -s v -sh 2 -nonl)
+	echo -n "^fg($COLOR_ICON)^i($ICONPATH/vol1.xbm)^fg()" $(echo $VOL | gdbar -fg $BAR_FG -bg $BAR_BG -h 7 -w 40 -s o -nonl)
 	return
 }
 
@@ -68,16 +72,16 @@ Temp ()
 Disk ()
 {
 	SDA2=$(df -h / | awk '/\/$/ {print $5}' | tr -d '%')
-	SDB1=$(df -h /home | awk '/home/ {print $5}' | tr -d '%')
+	SDA3=$(df -h /home | awk '/home/ {print $5}' | tr -d '%')
 	if [[ ${SDA2} -gt 60 ]] ; then
-		echo -n "^fg($COLOR_ICON)^i($ICONPATH/file1.xbm)^fg() $(echo $SDA2 | gdbar -fg $CRIT_COLOR -bg $BAR_BG -h $BAR_H -w $BAR_W -s o -sw 2 -nonl)"
+		echo -n "^fg($COLOR_ICON)^i($ICONPATH/file1.xbm)^fg() /:${SDA2}% $(echo $SDA2 | gdbar -fg $CRIT_COLOR -bg $BAR_BG -h 7 -w 40 -s o -ss 0 -sw 2 -nonl)"
 	else
-		echo -n "^fg($COLOR_ICON)^i($ICONPATH/file1.xbm)^fg() $(echo $SDA2 | gdbar -fg $BAR_FG -bg $BAR_BG -h $BAR_H -w $BAR_W -s o -sw 2 -nonl)"
+		echo -n "^fg($COLOR_ICON)^i($ICONPATH/file1.xbm)^fg() /:${SDA2}% $(echo $SDA2 | gdbar -fg $BAR_FG -bg $BAR_BG -h 7 -w 40 -s o -ss 0 -sw 2 -nonl)"
 	fi
-	if [[ ${SDB1} -gt 80 ]] ; then
-		echo -n " ^fg($COLOR_ICON)^i($ICONPATH/home.xbm)^fg() $(echo $SDB1 | gdbar -fg $CRIT_COLOR -bg $BAR_BG -h $BAR_H -w $BAR_W -s o -sw 2 -nonl)"
+	if [[ ${SDA3} -gt 80 ]] ; then
+		echo -n "  ~:${SDA3}% $(echo $SDA3 | gdbar -fg $CRIT_COLOR -bg $BAR_BG -h 7 -w 40 -s o -ss 0 -sw 2 -nonl)"
 	else
-		echo -n " ^fg($COLOR_ICON)^i($ICONPATH/home.xbm)^fg() $(echo $SDB1 | gdbar -fg $BAR_FG -bg $BAR_BG -h $BAR_H -w $BAR_W -s o -sw 2 -nonl)"
+		echo -n "  ~:${SDA3}% $(echo $SDA3 | gdbar -fg $BAR_FG -bg $BAR_BG -h 7 -w 40 -s o -ss 0 -sw 2 -nonl)"
 	fi
 	return
 }
@@ -127,21 +131,21 @@ OSLogo ()
 # Print 
 # -----
 Print () {
-	OSLogo
-	Kernel
-	Between
-#	MPD
-#	Between
-#	Temp
-#	Between
-    Mem
-    Between
-    Disk
-    Between
-    Vol
-    Between
-    Date
-    echo
+		OSLogo
+		Kernel
+		Between
+		MPD
+		Between
+#		Temp
+#		Between
+        Mem
+        Between
+        Disk
+        Between
+        Vol
+        Between
+        Date
+        echo
     return
 }
 
