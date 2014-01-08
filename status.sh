@@ -1,16 +1,10 @@
 #!/bin/bash
-
+# $HOME/.config/i3/status.sh
 # ------------------------------------------------------
-# file:     $HOME/.config/i3/status.sh
-# author:   gpix
-# modified: Jan '14
-# ------------------------------------------------------
-
-# -------------------------
 # Dzen settings & Variables
 # -------------------------
+SLEEP=2
 ICONPATH="/home/gpix/.config/i3/icons/stlarch_icons"
-#COLOR_ICON="#048283"
 COLOR_ICON="#BA2020"
 CRIT_COLOR="#ff2c4a"
 DZEN_FG="#A0A0A0"
@@ -24,8 +18,6 @@ BAR_BG="#808080"
 BAR_H=7
 BAR_W=40
 FONT="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
-
-SLEEP=2
 VUP="amixer -c0 -q set Master 2dB+"
 VDOWN="amixer -c0 -q set Master 2dB-"
 EVENT="button3=exit;button1=exec:$VUP;button2=exec:$VDOWN;"
@@ -42,7 +34,6 @@ sleep ${SLEEP}
 # ---------
 Vol ()
 {
-	#ONF=$(amixer get Master | awk '/Front\ Left:/ {print $7}' | tr -d '[]')
 	VOL=$(amixer get Master | egrep -o "[0-9]+%" | tr -d '%')
 	echo -n "^fg($COLOR_ICON)^i($ICONPATH/vol1.xbm)^fg()" $(echo $VOL | gdbar -fg $BAR_FG -bg $BAR_BG -h $BAR_H -w 2 -s v -sh 2 -nonl)
 	return
